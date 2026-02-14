@@ -61,14 +61,21 @@ const App = () => {
       }else {  
       personaServer
         .create(contactObject)
-        .then(returnedContact =>{
-          setPersons(prev => prev.concat(returnedContact))
+        .then(createdPerson =>{
+          setPersons(prev => prev.concat(createdPerson))
           setUpdate({message:`Added ${newName}`, type:'success'}) 
           setTimeout(()=> setUpdate({message: null, type:null}), 5000)
           setNewName('')
           setNewNumber('')
         })
-        .catch(error => console.error('create failed', error))
+        .catch(error => {
+          console.error('Creation failed', error)
+          setUpdate({message:error.response.data.error, type: 'error'})
+          setTimeout(()=> setUpdate({message: null, type: null}), 5000)
+          setNewName('')
+          setNewNumber('')
+        }
+        )
     }
   }  
 

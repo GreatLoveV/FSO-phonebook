@@ -12,7 +12,6 @@ const Notification = ({message})=>{
         marginBottom: '10px'
     }
         
-
     return (
         <div style={notificationStyle} >
         {message.message}
